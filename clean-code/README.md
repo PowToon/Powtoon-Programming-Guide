@@ -6,6 +6,7 @@
 ## Table of Contents
   1. [Introduction](#introduction)
   1. [Variables](#variables)
+  1. [Functional Programming](#functional-programming)
   1. [Functions](#functions)
   1. [Objects and Data Structures](#objects-and-data-structures)
   1. [Classes](#classes)
@@ -267,14 +268,60 @@ const employeesDataToRender = employees.map(employee => ({
 
 **[⬆ back to top](#table-of-contents)**
 
-## **Functions**
-### Use Functional Programming
-Read more about the reasoning behind using Functional Programming:
+## **Functional Programming**
+Read more about Functional Programming, the reasoning behind it and it's benifits here:
 
 * [JavaScript and Functional Programming](https://bethallchurch.github.io/JavaScript-and-Functional-Programming/)
 
 * [How functional programming is different from Object Oriented Programming](http://www.codenewbie.org/blogs/object-oriented-programming-vs-functional-programming)
 
+### Favor functional programming over imperative programming
+Functional programming is cleaner, easier to test and works better
+with react and redux.
+Favor this style of programming when you can.
+
+For the array:
+```javascript
+const programmerOutput = [
+  {
+    name: 'Uncle Bobby',
+    linesOfCode: 500
+  },
+  {
+    name: 'Suzie Q',
+    linesOfCode: 1500
+  },
+  {
+    name: 'Jimmy Gosling',
+    linesOfCode: 150
+  },
+  {
+    name: 'Gracie Hopper',
+    linesOfCode: 1000
+  }
+]
+```
+
+**Bad:**
+```javascript
+let totalOutput = 0
+
+for (let i = 0; i < programmerOutput.length; i++) {
+  totalOutput += programmerOutput[i].linesOfCode
+}
+```
+
+**Good:**
+```javascript
+const INITIAL_LINES_OF_CODE = 0
+
+const totalOutput = programmerOutput
+  .map((programmer) => programmer.linesOfCode)
+  .reduce((acc, linesOfCode) => acc + linesOfCode, INITIAL_LINES_OF_CODE)
+```
+**[⬆ back to top](#table-of-contents)**
+
+### Use Functional Programming instead of OOP
 Focus on purity of functions and immutability of objects
 and you will find yourself also avoiding OOP.
 
@@ -321,7 +368,8 @@ render(employeesAfterRaise)
 ```
 **[⬆ back to top](#table-of-contents)**
 
-### Don't hesitate to use lodash.
+## **Functions**
+### When possible use lodash.
 
 You can always assume everybody knows and uses [all lodash functions](https://lodash.com/docs).
 
@@ -882,52 +930,6 @@ arrDifference([1, 2], [1, 4])
 **Better:**
 ```javascript
 _.difference([1, 2], [1, 4])
-```
-**[⬆ back to top](#table-of-contents)**
-
-### Favor functional programming over imperative programming
-Functional programming is cleaner, easier to test and works better
-with react and redux.
-Favor this style of programming when you can.
-
-For the array:
-```javascript
-const programmerOutput = [
-  {
-    name: 'Uncle Bobby',
-    linesOfCode: 500
-  },
-  {
-    name: 'Suzie Q',
-    linesOfCode: 1500
-  },
-  {
-    name: 'Jimmy Gosling',
-    linesOfCode: 150
-  },
-  {
-    name: 'Gracie Hopper',
-    linesOfCode: 1000
-  }
-]
-```
-
-**Bad:**
-```javascript
-let totalOutput = 0
-
-for (let i = 0; i < programmerOutput.length; i++) {
-  totalOutput += programmerOutput[i].linesOfCode
-}
-```
-
-**Good:**
-```javascript
-const INITIAL_LINES_OF_CODE = 0
-
-const totalOutput = programmerOutput
-  .map((programmer) => programmer.linesOfCode)
-  .reduce((acc, linesOfCode) => acc + linesOfCode, INITIAL_LINES_OF_CODE)
 ```
 **[⬆ back to top](#table-of-contents)**
 
