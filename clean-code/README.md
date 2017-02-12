@@ -367,6 +367,99 @@ render(employeesAfterRaise)
 ```
 **[⬆ back to top](#table-of-contents)**
 
+### Avoid Side Effects (part 1)
+A function produces a side effect if it does anything other than take a value in
+and return another value or values. A side effect could be writing to a file,
+modifying some global variable, or accidentally wiring all your money to a
+stranger.
+
+Now, you do need to have side effects in a program on occasion. Like the previous
+example, you might need to write to a file. What you want to do is to
+centralize where you are doing this. Don't have several functions and classes
+that write to a particular file. Have one service that does it. One and only one.
+
+The main point is to avoid common pitfalls like sharing state between objects
+without any structure, using mutable data types that can be written to by anything,
+and not centralizing where your side effects occur. If you can do this, you will
+be happier than the vast majority of other programmers.
+
+**Bad:**
+```javascript
+// Global variable referenced by following function.
+// If we had another function that used this name, now it'd be an array and it could break it.
+let name = 'Ryan McDermott'
+
+function splitIntoFirstAndLastName() {
+  name = name.split(' ')
+}
+
+splitIntoFirstAndLastName()
+
+console.log(name) // ['Ryan', 'McDermott']
+```
+
+**Good:**
+```javascript
+function splitIntoFirstAndLastName(name) {
+  return name.split(' ')
+}
+
+const name = 'Ryan McDermott'
+const splittedName = splitIntoFirstAndLastName(name)
+
+console.log(name) // 'Ryan McDermott'
+console.log(splittedName) // ['Ryan', 'McDermott']
+```
+**[⬆ back to top](#table-of-contents)**
+
+### Avoid Side Effects (part 2)
+In JavaScript, primitives are passed by value and objects/arrays are passed by
+reference. In the case of objects and arrays, if your function makes a change
+in a shopping cart array, for example, by adding an item to purchase,
+then any other function that uses that `cart` array will be affected by this
+addition. That may be great, however it can be bad too. Let's imagine a bad
+situation:
+
+The user clicks the "Purchase", button which calls a `purchase` function that
+spawns a network request and sends the `cart` array to the server. Because
+of a bad network connection, the `purchase` function has to keep retrying the
+request. Now, what if in the meantime the user accidentally clicks "Add to Cart"
+button on an item they don't actually want before the network request begins?
+If that happens and the network request begins, then that purchase function
+will send the accidentally added item because it has a reference to a shopping
+cart array that the `addItemToCart` function modified by adding an unwanted
+item.
+
+A great solution would be for the `addItemToCart` to always clone the `cart`,
+edit it, and return the clone. This ensures that no other functions that are
+holding onto a reference of the shopping cart will be affected by any changes.
+
+Two caveats to mention to this approach:
+  1. There might be cases where you actually want to modify the input object,
+but when you adopt this programming practice you will find that those case
+are pretty rare. Most things can be refactored to have no side effects!
+
+  2. Cloning big objects can be very expensive in terms of performance. Luckily,
+this isn't a big issue in practice because there are
+[great libraries](https://facebook.github.io/immutable-js/) that allow
+this kind of programming approach to be fast and not as memory intensive as
+it would be for you to manually clone objects and arrays.
+
+**Bad:**
+```javascript
+const addItemToCart = (cart, item) => {
+  cart.push({ item, date: Date.now() })
+}
+```
+
+**Good:**
+```javascript
+const addItemToCart = (cart, item) => {
+  return [...cart, { item, date : Date.now() }]
+}
+```
+**[⬆ back to top](#table-of-contents)**
+
 ## **Functions**
 ### When possible use lodash.
 
@@ -804,100 +897,6 @@ function createTempFile(name) {
   createFile(`./temp/${name}`)
 }
 ```
-**[⬆ back to top](#table-of-contents)**
-
-### Avoid Side Effects (part 1)
-A function produces a side effect if it does anything other than take a value in
-and return another value or values. A side effect could be writing to a file,
-modifying some global variable, or accidentally wiring all your money to a
-stranger.
-
-Now, you do need to have side effects in a program on occasion. Like the previous
-example, you might need to write to a file. What you want to do is to
-centralize where you are doing this. Don't have several functions and classes
-that write to a particular file. Have one service that does it. One and only one.
-
-The main point is to avoid common pitfalls like sharing state between objects
-without any structure, using mutable data types that can be written to by anything,
-and not centralizing where your side effects occur. If you can do this, you will
-be happier than the vast majority of other programmers.
-
-**Bad:**
-```javascript
-// Global variable referenced by following function.
-// If we had another function that used this name, now it'd be an array and it could break it.
-let name = 'Ryan McDermott'
-
-function splitIntoFirstAndLastName() {
-  name = name.split(' ')
-}
-
-splitIntoFirstAndLastName()
-
-console.log(name) // ['Ryan', 'McDermott']
-```
-
-**Good:**
-```javascript
-function splitIntoFirstAndLastName(name) {
-  return name.split(' ')
-}
-
-const name = 'Ryan McDermott'
-const splittedName = splitIntoFirstAndLastName(name)
-
-console.log(name) // 'Ryan McDermott'
-console.log(splittedName) // ['Ryan', 'McDermott']
-```
-**[⬆ back to top](#table-of-contents)**
-
-### Avoid Side Effects (part 2)
-In JavaScript, primitives are passed by value and objects/arrays are passed by
-reference. In the case of objects and arrays, if your function makes a change
-in a shopping cart array, for example, by adding an item to purchase,
-then any other function that uses that `cart` array will be affected by this
-addition. That may be great, however it can be bad too. Let's imagine a bad
-situation:
-
-The user clicks the "Purchase", button which calls a `purchase` function that
-spawns a network request and sends the `cart` array to the server. Because
-of a bad network connection, the `purchase` function has to keep retrying the
-request. Now, what if in the meantime the user accidentally clicks "Add to Cart"
-button on an item they don't actually want before the network request begins?
-If that happens and the network request begins, then that purchase function
-will send the accidentally added item because it has a reference to a shopping
-cart array that the `addItemToCart` function modified by adding an unwanted
-item.
-
-A great solution would be for the `addItemToCart` to always clone the `cart`,
-edit it, and return the clone. This ensures that no other functions that are
-holding onto a reference of the shopping cart will be affected by any changes.
-
-Two caveats to mention to this approach:
-  1. There might be cases where you actually want to modify the input object,
-but when you adopt this programming practice you will find that those case
-are pretty rare. Most things can be refactored to have no side effects!
-
-  2. Cloning big objects can be very expensive in terms of performance. Luckily,
-this isn't a big issue in practice because there are
-[great libraries](https://facebook.github.io/immutable-js/) that allow
-this kind of programming approach to be fast and not as memory intensive as
-it would be for you to manually clone objects and arrays.
-
-**Bad:**
-```javascript
-const addItemToCart = (cart, item) => {
-  cart.push({ item, date: Date.now() })
-}
-```
-
-**Good:**
-```javascript
-const addItemToCart = (cart, item) => {
-  return [...cart, { item, date : Date.now() }]
-}
-```
-
 **[⬆ back to top](#table-of-contents)**
 
 ### Don't write to global functions
