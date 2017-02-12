@@ -13,7 +13,14 @@ everybody style their code the same. This can partly be achieved with
 linting but some rules are not and those who are still better be
 documented, discussed, explained, exampled and understood.
 
-We divide the guide into several parts:
+It is important to notice that some parts are highly debated in the
+community and will be surely debated between us as well (even on a
+biblical scale :P) but nevertheless we should all stick to the
+guide. Changing the guide should be relatively easy and everybody
+are **highly encouraged to influence it** to make changes in the guide
+and make everybody align to their opinion.
+
+The guide consists of several parts:
 
 * [The Clean Code Guide](clean-code) is about general programming
 best practises and conventions considering the nature of the
