@@ -270,8 +270,10 @@ const employeesDataToRender = employees.map(employee => ({
 ## **Functions**
 ### Use Functional Programming
 Read more about the reasoning behind using Functional Programming:
-[JavaScript and Functional Programming](https://bethallchurch.github.io/JavaScript-and-Functional-Programming/)
-[How functional programming is different from Object Oriented Programming](http://www.codenewbie.org/blogs/object-oriented-programming-vs-functional-programming)
+
+* [JavaScript and Functional Programming](https://bethallchurch.github.io/JavaScript-and-Functional-Programming/)
+
+* [How functional programming is different from Object Oriented Programming](http://www.codenewbie.org/blogs/object-oriented-programming-vs-functional-programming)
 
 Focus on purity of functions and immutability of objects
 and you will find yourself also avoiding OOP.
