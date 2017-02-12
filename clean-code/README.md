@@ -862,7 +862,7 @@ show the difference between two arrays? You could write your new function
 to the `Array.prototype`, but it could clash with another library that tried
 to do the same thing. What if that other library was just using `diff` to find
 the difference between the first and last elements of an array? This is why it
-would be much better to just use ES2015/ES6 classes and simply extend the `Array` global.
+would be much better to write a utility or find a library to does what you need.
 
 **Bad:**
 ```javascript
@@ -870,16 +870,18 @@ Array.prototype.diff = function diff(comparisonArray) {
   const hash = new Set(comparisonArray)
   return this.filter(elem => !hash.has(elem))
 }
+[1, 2].diff([1, 4])
 ```
 
 **Good:**
 ```javascript
-class SuperArray extends Array {
-  diff(comparisonArray) {
-    const hash = new Set(comparisonArray)
-    return this.filter(elem => !hash.has(elem))
-  }
-}
+import {arrDifference} from 'utils'
+arrDifference([1, 2], [1, 4])
+```
+
+**Better:**
+```javascript
+_.difference([1, 2], [1, 4])
 ```
 **[⬆ back to top](#table-of-contents)**
 
