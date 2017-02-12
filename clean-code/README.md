@@ -406,8 +406,6 @@ do more than one thing, they are harder to compose, test, and reason about.
 When you can isolate a function to just one action, they can be refactored
 easily and your code will read much cleaner.
 
-*In general, you should be alerted if you find yourself using "forEach" that is long or not pure*
-
 **Bad:**
 ```javascript
 function emailClients(clients) {
@@ -433,6 +431,9 @@ function isClientActive(client) {
   return clientRecord.isActive()
 }
 ```
+
+In general, you should be alerted if you find yourself using "forEach"
+that is long or pushing to an array:
 
 **Bad:**
 ```javascript
