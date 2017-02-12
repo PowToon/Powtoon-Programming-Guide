@@ -3,16 +3,16 @@
 
 ## Table of Contents
   1. [Introduction](#introduction)
-  2. [Variables](#variables)
-  3. [Functions](#functions)
-  4. [Objects and Data Structures](#objects-and-data-structures)
-  5. [Classes](#classes)
-  6. [Testing](#testing)
-  7. [Concurrency](#concurrency)
-  8. [Error Handling](#error-handling)
-  9. [Formatting](#formatting)
-  10. [Comments](#comments)
-  11. [Translation](#translation)
+  1. [Variables](#variables)
+  1. [Functions](#functions)
+  1. [Objects and Data Structures](#objects-and-data-structures)
+  1. [Classes](#classes)
+  1. [Testing](#testing)
+  1. [Concurrency](#concurrency)
+  1. [Error Handling](#error-handling)
+  1. [Formatting](#formatting)
+  1. [Comments](#comments)
+  1. [Translation](#translation)
 
 ## Introduction
 ![Humorous image of software quality estimation as a count of how many expletives
