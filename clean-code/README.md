@@ -886,28 +886,34 @@ _.difference([1, 2], [1, 4])
 **[⬆ back to top](#table-of-contents)**
 
 ### Favor functional programming over imperative programming
-JavaScript isn't a functional language in the way that Haskell is, but it has
-a functional flavor to it. Functional languages are cleaner and easier to test.
+Functional programming is cleaner, easier to test and works better
+with react and redux.
 Favor this style of programming when you can.
 
-**Bad:**
+For the array:
 ```javascript
 const programmerOutput = [
   {
     name: 'Uncle Bobby',
     linesOfCode: 500
-  }, {
+  },
+  {
     name: 'Suzie Q',
     linesOfCode: 1500
-  }, {
+  },
+  {
     name: 'Jimmy Gosling',
     linesOfCode: 150
-  }, {
+  },
+  {
     name: 'Gracie Hopper',
     linesOfCode: 1000
   }
 ]
+```
 
+**Bad:**
+```javascript
 let totalOutput = 0
 
 for (let i = 0; i < programmerOutput.length; i++) {
@@ -917,27 +923,11 @@ for (let i = 0; i < programmerOutput.length; i++) {
 
 **Good:**
 ```javascript
-const programmerOutput = [
-  {
-    name: 'Uncle Bobby',
-    linesOfCode: 500
-  }, {
-    name: 'Suzie Q',
-    linesOfCode: 1500
-  }, {
-    name: 'Jimmy Gosling',
-    linesOfCode: 150
-  }, {
-    name: 'Gracie Hopper',
-    linesOfCode: 1000
-  }
-]
-
-const INITIAL_VALUE = 0
+const INITIAL_LINES_OF_CODE = 0
 
 const totalOutput = programmerOutput
   .map((programmer) => programmer.linesOfCode)
-  .reduce((acc, linesOfCode) => acc + linesOfCode, INITIAL_VALUE)
+  .reduce((acc, linesOfCode) => acc + linesOfCode, INITIAL_LINES_OF_CODE)
 ```
 **[⬆ back to top](#table-of-contents)**
 
