@@ -1132,6 +1132,8 @@ console.log(`Employee name: ${employee.getName()}`) // Employee name: John Doe
 
 ## **Classes**
 ### Single Responsibility Principle (SRP)
+//TODO: is this too OOP for us?
+
 As stated in Clean Code, "There should never be more than one reason for a class
 to change". It's tempting to jam-pack a class with a lot of functionality, like
 when you can only take one suitcase on your flight. The issue with this is
@@ -1189,6 +1191,8 @@ class UserSettings {
 **[⬆ back to top](#table-of-contents)**
 
 ### Open/Closed Principle (OCP)
+//TODO: is this too OOP for us?
+
 As stated by Bertrand Meyer, "software entities (classes, modules, functions,
 etc.) should be open for extension, but closed for modification." What does that
 mean though? This principle basically states that you should allow users to
@@ -1276,6 +1280,8 @@ class HttpRequester {
 **[⬆ back to top](#table-of-contents)**
 
 ### Interface Segregation Principle (ISP)
+//TODO: is this too OOP for us?
+
 JavaScript doesn't have interfaces so this principle doesn't apply as strictly
 as others. However, it's important and relevant even with JavaScript's lack of
 type system.
@@ -1857,29 +1863,29 @@ from `try/catch`.
 **Bad:**
 ```javascript
 getdata()
-.then((data) => {
-  functionThatMightThrow(data)
-})
-.catch((error) => {
-  console.log(error)
-})
+  .then((data) => {
+    functionThatMightThrow(data)
+  })
+  .catch((error) => {
+    console.log(error)
+  })
 ```
 
 **Good:**
 ```javascript
 getdata()
-.then((data) => {
-  functionThatMightThrow(data)
-})
-.catch((error) => {
-  // One option (more noisy than console.log):
-  console.error(error)
-  // Another option:
-  notifyUserOfError(error)
-  // Another option:
-  reportErrorToService(error)
-  // OR do all three!
-})
+  .then((data) => {
+    functionThatMightThrow(data)
+  })
+  .catch((error) => {
+    // One option (more noisy than console.log):
+    console.error(error)
+    // Another option:
+    notifyUserOfError(error)
+    // Another option:
+    reportErrorToService(error)
+    // OR do all three!
+  })
 ```
 
 **[⬆ back to top](#table-of-contents)**
