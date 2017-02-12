@@ -1,10 +1,11 @@
 # PowToon React Guide
 
-*A mostly reasonable approach to React and JSX Based on [Airbnb React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react).*
+*A mostly reasonable approach to React.*
 
 ## Table of Contents
 
-  1. [Prefer Stateless and Pure functions](#prefer-stateless-and-pure-functions)
+  1. [Prefer Composition over Inheritance and Mixins](#prefer-composition-over-inheritance-and-mixins)
+  1. [Prefer Stateless and Pure Functions](#prefer_stateless_and_pure_functions)
   1. [Naming](#naming)
   1. [Declaration](#declaration)
   1. [Alignment](#alignment)
@@ -17,11 +18,162 @@
   1. [Methods](#methods)
   1. [Ordering](#ordering)
   1. [`isMounted`](#ismounted)
+
+## Prefer Composition over Inheritance and Mixins
+In general, mixins and inheritance are worse then composition in most of the cases
+in theory ([even in OOP](https://www.joezimjs.com/javascript/composition-is-king/)).
+When following, like we do, the Functional Programming approach, inheritance should
+be used even rarely and with the addition of language limitations, like bad handling
+if static members, composition should always replace inheritance and mixins.
+
+"Higher order components" are the implementation of composition with React components.
+
+To read more about this:
+* [Dan Abramov about why mixins should be replaced with higher order components](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750)
+* [Facebook's documentation about composition vs. inheritance](https://facebook.github.io/react/docs/composition-vs-inheritance.html)
+
+**Bad:**
+```jsx
+class BaseButton extends React.Component {
+  static PropTypes = {
+    onClick: React.PropTypes.func.isRequired,
+    text: React.PropTypes.string.isRequired
+  }
+  
+  getClassName(){
+    return 'base-button'
+  }
+  
+  render(){
+    const {text, onClick} = this.props
+    return <Button className={this.getClassName()} onClick={onClick}>{text}</Button>
+  }
+}
+
+class RedButton extends BaseButton {
+  getClassName(){
+    return 'red-button'
+  }
+}
+```
+
+**Good:**
+```jsx
+class BaseButton extends React.Component {
+  static PropTypes = {
+    onClick: React.PropTypes.func.isRequired,
+    text: React.PropTypes.string.isRequired,
+    className: React.PropTypes.string
+  }
+  
+  static defaultProps = {
+    className: 'base-button'
+  }
+  
+  render(){
+    const {onClick, text, className} = this.props
+    return <Button className={className} onClick={onClick}>{text}</Button>
+  }
+}
+
+class RedButton extends React.Component {
+  static PropTypes = {
+    onClick: React.PropTypes.func.isRequired,
+    text: React.PropTypes.string.isRequired
+  }
+  
+  render(){
+    return <BaseButton className={'red-button'} {...this.props} />
+  }
+}
+```
+
+If you want to add functionality to a component, create a wrapper component
+that uses the component inside it's render function.
+
+```jsx
+class Hidable extends React.Component {
+  state = {
+    hidden: false
+  }
+  
+  onClick = () => {
+    const {hidden} = this.state
+    this.setState({hidden: !hidden})
+  }
+  
+  render(){
+    const {hidden} = this.state
+    const {children} = this.props
     
+    return (
+      <div onClick={this.onClick} hidden={hidden} >
+        {children}
+      </div>
+    )
+  }
+}
+
+function SomeComponent(){
+ return (
+   <Hidable>
+     <span>Some Text</span>
+   </Hidable>
+ )
+}
+
+```
+
+Sometimes, composition looks better using a wrapping function. This way of wrapping
+is also good because it can be used as a decorator in future when the language
+fully support it (and this should happen soon).
+
+```jsx
+function makeHidable(WrappedComponent){
+  return class Hidable extends React.Component {
+    state = {
+      hidden: false
+    }
+    
+    onClick = () => {
+      const {hidden} = this.state
+      this.setState({hidden: !hidden})
+    }
+    
+    render(){
+      const {hidden} = this.state
+
+      <div onClick={this.onClick} hidden={hidden} >
+        <WrappedComponent {...this.props} />
+      </div>
+    }
+  }  
+}
+
+class SomeClass extends React.Component {
+  ...
+}
+SomeClass = makeHidable(<SomeClass />)
+
+function SomeComponent(){
+  return (
+    <HidableSomeClass />
+  )
+}
+
+// makeHidable can also be used as a decorator
+
+@makeHidable
+class SomeClass extends React.Component {
+  ...
+}
+
+```
+
 ## Prefer Stateless and Pure Functions
 
 ```jsx
-// if possible: stateless component:
+// if possible: stateless component
 function Listing({ hello }) {
   return <div>{hello}</div>;
 }
