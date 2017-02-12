@@ -269,17 +269,16 @@ const employeesDataToRender = employees.map(employee => ({
 **[⬆ back to top](#table-of-contents)**
 
 ## **Functional Programming**
-Read more about Functional Programming, the reasoning behind it and it's benifits here:
+Functional programming is cleaner, easier to test and works better
+with react and redux. Favor this style of programming when you can.
+Read more about Functional Programming, the reasoning behind
+it and it's benifits here:
 
 * [JavaScript and Functional Programming](https://bethallchurch.github.io/JavaScript-and-Functional-Programming/)
 
 * [How functional programming is different from Object Oriented Programming](http://www.codenewbie.org/blogs/object-oriented-programming-vs-functional-programming)
 
 ### Favor functional programming over imperative programming
-Functional programming is cleaner, easier to test and works better
-with react and redux.
-Favor this style of programming when you can.
-
 For the array:
 ```javascript
 const programmerOutput = [
