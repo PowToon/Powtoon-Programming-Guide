@@ -1024,12 +1024,11 @@ inventoryTracker('apples', req, 'www.inventory-awesome.io')
 
 **Good:**
 ```javascript
-function newRequestModule(url) {
+function requestModule(url) {
   // ...
 }
 
-const req = newRequestModule
-inventoryTracker('apples', req, 'www.inventory-awesome.io')
+requestModule.inventoryTracker('apples', 'www.inventory-awesome.io')
 ```
 **[⬆ back to top](#table-of-contents)**
 
