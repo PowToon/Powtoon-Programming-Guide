@@ -797,10 +797,10 @@ function splitIntoFirstAndLastName(name) {
 }
 
 const name = 'Ryan McDermott'
-const newName = splitIntoFirstAndLastName(name)
+const splittedName = splitIntoFirstAndLastName(name)
 
 console.log(name) // 'Ryan McDermott'
-console.log(newName) // ['Ryan', 'McDermott']
+console.log(splittedName) // ['Ryan', 'McDermott']
 ```
 **[⬆ back to top](#table-of-contents)**
 
