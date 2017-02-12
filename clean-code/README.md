@@ -660,7 +660,7 @@ function showEmployeeList(employees) {
 ```
 **[⬆ back to top](#table-of-contents)**
 
-### Set default objects with Object.assign
+### Set default objects with Object.assign or even better _.defaults
 
 **Bad:**
 ```javascript
@@ -697,6 +697,30 @@ function createMenu(config) {
     buttonText: 'Baz',
     cancellable: true
   }, config)
+
+  // config now equals: {title: "Order", body: "Bar", buttonText: "Send", cancellable: true}
+  // ...
+}
+
+createMenu(menuConfig)
+```
+
+**Better**
+```javascript
+const menuConfig = {
+  title: 'Order',
+  // User did not include 'body' key
+  buttonText: 'Send',
+  cancellable: true
+}
+
+function createMenu(config) {
+  return _.defaults(config, {
+    title: 'Foo',
+    body: 'Bar',
+    buttonText: 'Baz',
+    cancellable: true
+  })
 
   // config now equals: {title: "Order", body: "Bar", buttonText: "Send", cancellable: true}
   // ...
