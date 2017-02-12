@@ -1,6 +1,8 @@
 
 # PowToon clean code guide
 
+*A mostly reasonable approach to writing a clean code based on [clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript)*
+
 ## Table of Contents
   1. [Introduction](#introduction)
   1. [Variables](#variables)
@@ -33,13 +35,6 @@ still learning a lot. When software architecture is as old as architecture
 itself, maybe then we will have harder rules to follow. For now, let these
 guidelines serve as a touchstone by which to assess the quality of the
 JavaScript code that you and your team produce.
-
-One more thing: knowing these won't immediately make you a better software
-developer, and working with them for many years doesn't mean you won't make
-mistakes. Every piece of code starts as a first draft, like wet clay getting
-shaped into its final form. Finally, we chisel away the imperfections when
-we review it with our peers. Don't beat yourself up for first drafts that need
-improvement. Beat up the code instead!
 
 ## **Variables**
 ### Use meaningful and pronounceable variable names
