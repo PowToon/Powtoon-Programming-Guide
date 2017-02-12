@@ -321,7 +321,7 @@ render(employeesAfterRaise)
 ```
 **[⬆ back to top](#table-of-contents)**
 
-### Dont hesitate to use lodash.
+### Don't hesitate to use lodash.
 
 You can always assume everybody knows and uses [all lodash functions](https://lodash.com/docs).
 
