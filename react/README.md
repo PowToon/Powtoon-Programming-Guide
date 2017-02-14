@@ -5,7 +5,7 @@
 ## Table of Contents
 
   1. [Prefer Composition over Inheritance and Mixins](#prefer-composition-over-inheritance-and-mixins)
-  1. [Prefer Stateless and Pure Functions](#prefer_stateless_and_pure_functions)
+  1. [Stateless vs Pure vs Regular Components](#stateless_vs_pure_vs_regular_components)
   1. [Naming](#naming)
   1. [Declaration](#declaration)
   1. [Alignment](#alignment)
@@ -170,30 +170,21 @@ class SomeClass extends React.Component {
 
 ```
 
-## Prefer Stateless and Pure Functions
-
-```jsx
-// if possible: stateless component
-function Listing({ hello }) {
-  return <div>{hello}</div>;
-}
-
-// next best: pure react component
-class Listing extends React.PureComponent {
-  // ...
-  render() {
-    return <div>{this.state.hello}</div>;
+## Stateless vs Pure vs Regular Components
+* A Stateless Component is a component without a state defined by a function. For example:
+  ```jsx
+  function Hello({someone}){
+    return <div>{`Hello ${someone}`}</div>
   }
-}
+  ```
+  It is the shortest in terms of lines of code.
+* A Pure Component is a component that launches a shallow compare inside it's
+[`ShouldComponentUpdate()`](https://facebook.github.io/react/docs/react-component.html#shouldcomponentupdate).
+It is the fastest of the three. [Yes. faster then stateless components](https://medium.com/modus-create-front-end-development/component-rendering-performance-in-react-df859b474adc#.i6l3cqqzp).
 
-// next best: react component
-class Listing extends React.Component {
-  // ...
-  render() {
-    return <div>{this.state.hello}</div>;
-  }
-}
-```
+* A Regular React Component. It is the most flexible one.
+
+//TODO: when to use what
 
 ## Naming
 
