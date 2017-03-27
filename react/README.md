@@ -17,7 +17,7 @@
   1. [Tags](#tags)
   1. [Methods](#methods)
   1. [Ordering](#ordering)
-  1. [`isMounted`](#ismounted)
+  1. [isMounted](#ismounted)
 
 ## Prefer Composition over Inheritance and Mixins
 In general, mixins and inheritance are worse then composition in most of the cases
@@ -170,6 +170,8 @@ class SomeClass extends React.Component {
 
 ```
 
+**[⬆ back to top](#table-of-contents)**
+
 ## Stateless vs Pure vs Regular Components
 * A Stateless Component is a component without a state defined by a function. For example:
   ```jsx
@@ -186,6 +188,8 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
 * A Regular React Component. It is the most flexible one.
 
 >//TODO: More guidelines will follow. For now, choose the component type you need based on the explanations above.
+
+**[⬆ back to top](#table-of-contents)**
 
 ## Naming
 
@@ -266,6 +270,8 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
     <MyComponent variant="fancy" />
     ```
 
+**[⬆ back to top](#table-of-contents)**
+
 ## Declaration
 
   - Do not use `displayName` for naming components. Instead, name the component by reference.
@@ -281,6 +287,8 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
     export default class ReservationCard extends React.Component {
     }
     ```
+
+**[⬆ back to top](#table-of-contents)**
 
 ## Alignment
 
@@ -312,6 +320,8 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
   </Foo>
   ```
 
+**[⬆ back to top](#table-of-contents)**
+
 ## Quotes
 
   - Always use double quotes (`"`) for JSX attributes, but single quotes (`'`) for all other JS.
@@ -332,6 +342,8 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
     // good
     <Foo style={{ left: '20px' }} />
     ```
+
+**[⬆ back to top](#table-of-contents)**
 
 ## Spacing
 
@@ -364,6 +376,8 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
     // good
     <Foo bar={baz} />
     ```
+
+**[⬆ back to top](#table-of-contents)**
 
 ## Props
 
@@ -516,6 +530,8 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
   }
   ```
 
+**[⬆ back to top](#table-of-contents)**
+
 ## Refs
 
   - Always use ref callbacks.
@@ -537,6 +553,8 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
     ref={this.setRef}
   />
   ```
+
+**[⬆ back to top](#table-of-contents)**
 
 ## Parentheses
 
@@ -567,6 +585,8 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
     }
     ```
 
+**[⬆ back to top](#table-of-contents)**
+
 ## Tags
 
   - Always self-close tags that have no children.
@@ -595,6 +615,8 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
       baz="baz"
     />
     ```
+
+**[⬆ back to top](#table-of-contents)**
 
 ## Methods
 
@@ -728,6 +750,8 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
     }
     ```
 
+**[⬆ back to top](#table-of-contents)**
+
 ## Ordering
 
   - Ordering for `class extends React.Component`:
@@ -746,24 +770,15 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
   1. *getter methods for `render`* like `getSelectReason()` or `getFooterContent()`
   1. `render`
 
+**[⬆ back to top](#table-of-contents)**
+
 ## `isMounted`
 
-  - Do not use `isMounted`. eslint: [`react/no-is-mounted`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-is-mounted.md)
+  - Do not use `isMounted`.
+  eslint: [`react/no-is-mounted`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-is-mounted.md)
 
   > Why? [`isMounted` is an anti-pattern][anti-pattern], is not available when using ES6 classes, and is on its way to being officially deprecated.
 
   [anti-pattern]: https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html
-
-## Translation
-
-  This JSX/React style guide is also available in other languages:
-
-  - ![cn](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/China.png) **Chinese (Simplified)**: [JasonBoy/javascript](https://github.com/JasonBoy/javascript/tree/master/react)
-  - ![pl](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Poland.png) **Polish**: [pietraszekl/javascript](https://github.com/pietraszekl/javascript/tree/master/react)
-  - ![kr](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/South-Korea.png) **Korean**: [apple77y/javascript](https://github.com/apple77y/javascript/tree/master/react)
-  - ![Br](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Brazil.png) **Portuguese**: [ronal2do/javascript](https://github.com/ronal2do/airbnb-react-styleguide)
-  - ![jp](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Japan.png) **Japanese**: [mitsuruog/javascript-style-guide](https://github.com/mitsuruog/javascript-style-guide/tree/master/react)
-  - ![es](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Spain.png) **Español**: [agrcrobles/javascript](https://github.com/agrcrobles/javascript/tree/master/react)
-  - ![ua](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Ukraine.png) **Ukrainian**: [ivanzusko/javascript](https://github.com/ivanzusko/javascript/tree/master/react)
 
 **[⬆ back to top](#table-of-contents)**
