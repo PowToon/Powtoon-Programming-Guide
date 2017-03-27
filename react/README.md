@@ -289,28 +289,28 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
 
   > Why? This should help to better keep track of a component's start, end and children.
 
-    ```jsx
-    // bad
-    <Foo superLongParam="bar"
-         anotherSuperLongParam="baz" />
+  ```jsx
+  // bad
+  <Foo superLongParam="bar"
+       anotherSuperLongParam="baz" />
 
-    // good
-    <Foo
-      superLongParam="bar"
-      anotherSuperLongParam="baz"
-    />
+  // good
+  <Foo
+    superLongParam="bar"
+    anotherSuperLongParam="baz"
+  />
 
-    // if props fit in one line then keep it on the same line
-    <Foo bar="bar" />
+  // if props fit in one line then keep it on the same line
+  <Foo bar="bar" />
 
-    // children get indented normally
-    <Foo
-      superLongParam="bar"
-      anotherSuperLongParam="baz"
-    >
-      <Quux />
-    </Foo>
-    ```
+  // children get indented normally
+  <Foo
+    superLongParam="bar"
+    anotherSuperLongParam="baz"
+  >
+    <Quux />
+  </Foo>
+  ```
 
 ## Quotes
 
@@ -569,7 +569,8 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
 
 ## Tags
 
-  - Always self-close tags that have no children. eslint: [`react/self-closing-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/self-closing-comp.md)
+  - Always self-close tags that have no children.
+  eslint: [`react/self-closing-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/self-closing-comp.md)
 
     ```jsx
     // bad
@@ -579,7 +580,8 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
     <Foo className="stuff" />
     ```
 
-  - If your component has multi-line properties, close its tag on a new line. eslint: [`react/jsx-closing-bracket-location`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-bracket-location.md)
+  - If your component has multi-line properties, close its tag on a new line.
+  eslint: [`react/jsx-closing-bracket-location`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-bracket-location.md)
 
     ```jsx
     // bad
