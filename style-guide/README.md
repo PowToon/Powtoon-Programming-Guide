@@ -1,18 +1,10 @@
-# PowToon JavaScript Style Guide() {
+# PowToon JavaScript Style Guide
 
 *A mostly reasonable approach to JavaScript Based on [Airbnb Style Guide](https://github.com/airbnb/javascript)*
-
-Other Style Guides
- - [ES5 (Deprecated)](https://github.com/airbnb/javascript/tree/es5-deprecated/es5)
- - [React](react/)
- - [CSS-in-JavaScript](css-in-javascript/)
- - [CSS & Sass](https://github.com/airbnb/css)
- - [Ruby](https://github.com/airbnb/ruby)
 
 ## Table of Contents
 
   1. [Files](#files)
-  
   1. [Types](#types)
   1. [References](#references)
   1. [Objects](#objects)
@@ -3334,5 +3326,3 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ## Amendments
 
 We encourage you to fork this guide and change the rules to fit your team's style guide. Below, you may list some amendments to the style guide. This allows you to periodically update your style guide without having to deal with merge conflicts.
-
-# };
