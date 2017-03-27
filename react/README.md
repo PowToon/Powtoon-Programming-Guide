@@ -4,7 +4,7 @@
 
 ## Table of Contents
 
-  1. [Prefer Composition over Inheritance and Mixins](#prefer-composition-over-inheritance-and-mixins)
+  1. [Prefer Composition over Inheritance and Mixins](#prefer_composition_over_inheritance_and_mixins)
   1. [Stateless vs Pure vs Regular Components](#stateless_vs_pure_vs_regular_components)
   1. [Naming](#naming)
   1. [Declaration](#declaration)
@@ -18,6 +18,7 @@
   1. [Methods](#methods)
   1. [Ordering](#ordering)
   1. [isMounted](#ismounted)
+  1. [Render Functions](#render_functions)
 
 ## Prefer Composition over Inheritance and Mixins
 In general, mixins and inheritance are worse then composition in most of the cases
@@ -772,13 +773,69 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
 
 **[⬆ back to top](#table-of-contents)**
 
-## `isMounted`
+## isMounted
 
-  - Do not use `isMounted`.
+  - Do not use isMounted.
   eslint: [`react/no-is-mounted`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-is-mounted.md)
 
-  > Why? [`isMounted` is an anti-pattern][anti-pattern], is not available when using ES6 classes, and is on its way to being officially deprecated.
-
-  [anti-pattern]: https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html
+    > Why? [`isMounted` is an anti-pattern][anti-pattern], is not available when using ES6 classes, and is on its way to being officially deprecated.
+  
+    [anti-pattern]: https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html
 
 **[⬆ back to top](#table-of-contents)**
+
+## Render Functions
+
+  - Do not use render functions.
+  
+    > Why? render functions are against functional programming and are expansive in terms of memory.
+    The reason for this is that these functions are not pure and dependant on "this"- which means
+    they are harder to test, understand and change.
+    Also they are created for each component instead of only once.
+    
+    > Use a separate inline component instead. Use recompose if needed.
+    
+    ```jsx
+    // bad
+      // ...
+      onClick = e => {
+        const {onClick, itemId} = this.props
+        onClick(itemId)
+      }
+      
+      // this function will be created as part of construction the component,
+      // for every instance of the component.
+      renderItem = () => {
+        const {itemId} = this.props
+        <div onClick={this.onClick}>{`item_${itemId}`}</div>
+      }
+      
+      render() {
+        return (
+          <div onClick={this.onClick}>
+            {this.renderItem()}
+          </div>
+        )
+      }
+    }
+    
+    // good
+      //..
+      onClick = e => {
+        const {onClick, itemId} = this.props
+        onClick(itemId)
+      }
+
+      render() {
+        const {itemId} = this.props
+        return (
+          <div onClick={this.onClick}>
+            <Item itemId={itemId} onClick={onClick}/>
+          </div>
+        )
+      }
+    }
+    
+    //This inline component is created only once.
+    const Item = ({itemId, onClick}) => <div onClick={onClick}>{`item_${itemId}`}</div>
+    ```
