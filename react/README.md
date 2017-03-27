@@ -18,7 +18,7 @@
   1. [Methods](#methods)
   1. [Ordering](#ordering)
   1. [isMounted](#ismounted)
-  1. [Render Functions](#render_functions)
+  1. [Component Functions](#component_functions)
 
 ## Prefer Composition over Inheritance and Mixins
 In general, mixins and inheritance are worse then composition in most of the cases
@@ -784,17 +784,71 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
 
 **[⬆ back to top](#table-of-contents)**
 
-## Render Functions
+## Component Functions
 
+  - Extract as many functions as possible out of the component.
+
+    > Why?
+    > - First of all, we would like a class to expose as less as possible functions because
+      they are public. There are no private functions in JS.
+    > - Secondary, functions that are out of the component's scope will have no reference to the
+      component's instance ("this"), and this will help to ensure they are pure.
+    > - The third reason is that it saves us memory. Arrow functions are created for each
+      instance of the component. We would prefer create as less as we can, instead.
+    
+    ```jsx
+    // bad
+    class Item extends Component {
+      
+      //...
+      
+      getStyle = () => {
+        const {width, height} = this.props
+        return {
+          width: width * 2,
+          height: height * 2
+        }
+      }
+      
+      render() {
+        return (
+          <div onClick={this.onClick} style={this.getStyle()}>
+            hey!
+          </div>
+        )
+      }
+    }
+    
+    // good
+    const getStyle = ({width, height}) => ({
+      width: width * 2,
+      height: height * 2
+    })
+        
+    class Item extends Component {
+            
+      //...
+
+      render() {
+        const {width, height} = this.props
+        const style = getStyle({width, height})
+        
+        return (
+          <div onClick={this.onClick} style={this.getStyle()}>
+            hey!
+          </div>
+        )
+      }
+    }
+    
+    // TODO: BETTER
+    ```
+        
   - Do not use render functions.
   
-    > Why? render functions are against functional programming and are expansive in terms of memory.
-    The reason for this is that these functions are not pure and dependant on "this"- which means
-    they are harder to test, understand and change.
-    Also they are created for each component instead of only once.
-    
-    > Use a separate inline component instead. Use recompose if needed.
-    
+    > Why? For the same reasons specified in the previous section, but instead of using
+      a plain function, use an inline component (with recompose if needed).
+        
     ```jsx
     // bad
       // ...
@@ -839,3 +893,5 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
     //This inline component is created only once.
     const Item = ({itemId, onClick}) => <div onClick={onClick}>{`item_${itemId}`}</div>
     ```
+  
+**[⬆ back to top](#table-of-contents)**
