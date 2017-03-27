@@ -178,19 +178,18 @@ class SomeClass extends React.Component {
   }
   ```
   It is the shortest in terms of lines of code.
+  
 * A Pure Component is a component that launches a shallow compare inside it's
 [`ShouldComponentUpdate()`](https://facebook.github.io/react/docs/react-component.html#shouldcomponentupdate).
-It is the fastest of the three. [Yes. faster then stateless components](https://medium.com/modus-create-front-end-development/component-rendering-performance-in-react-df859b474adc#.i6l3cqqzp).
+It is the fastest of the three. Yes- [it is faster then stateless components](https://medium.com/modus-create-front-end-development/component-rendering-performance-in-react-df859b474adc#.i6l3cqqzp).
 
 * A Regular React Component. It is the most flexible one.
 
-//TODO: when to use what
+//TODO: More guidelines will follow. For now, choose the component type you need based on the explanations above.
 
 ## Naming
 
-  - **Extensions**: Use `.jsx` extension for React components.
-  - **Filename**: Use PascalCase for filenames. E.g., `ReservationCard.jsx`.
-  - **Reference Naming**: Use PascalCase for React components and camelCase for their instances. eslint: [`react/jsx-pascal-case`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-pascal-case.md)
+  - **Reference Naming**: Use PascalCase for React components and camelCase for their instances.
 
     ```jsx
     // bad
@@ -206,7 +205,10 @@ It is the fastest of the three. [Yes. faster then stateless components](https://
     const reservationItem = <ReservationCard />;
     ```
 
-  - **Component Naming**: Use the filename as the component name. For example, `ReservationCard.jsx` should have a reference name of `ReservationCard`. However, for root components of a directory, use `index.jsx` as the filename and use the directory name as the component name:
+  - **Component Naming**: Use the filename as the component name. For example,
+  `ReservationCard.jsx` should have a reference name of `ReservationCard`.
+  However, for root components of a directory, use `index.jsx` as the filename
+  and use the directory name as the component name:
 
     ```jsx
     // bad
@@ -218,9 +220,14 @@ It is the fastest of the three. [Yes. faster then stateless components](https://
     // good
     import Footer from './Footer';
     ```
-  - **Higher-order Component Naming**: Use a composite of the higher-order component's name and the passed-in component's name as the `displayName` on the generated component. For example, the higher-order component `withFoo()`, when passed a component `Bar` should produce a component with a `displayName` of `withFoo(Bar)`.
+    
+  - **Higher-order Component Naming**: Use a composite of the higher-order component's
+  name and the passed-in component's name as the `displayName` on the generated component.
+  For example, the higher-order component `withFoo()`, when passed a component `Bar`
+  should produce a component with a `displayName` of `withFoo(Bar)`.
 
-  > Why? A component's `displayName` may be used by developer tools or in error messages, and having a value that clearly expresses this relationship helps people understand what is happening.
+  > Why? A component's `displayName` may be used by developer tools or in error messages,
+  and having a value that clearly expresses this relationship helps people understand what is happening.
 
     ```jsx
     // bad
@@ -247,7 +254,8 @@ It is the fastest of the three. [Yes. faster then stateless components](https://
 
   - **Props Naming**: Avoid using DOM component prop names for different purposes.
 
-  > Why? People expect props like `style` and `className` to mean one specific thing. Varying this API for a subset of your app makes the code less readable and less maintainable, and may cause bugs.
+  > Why? People expect props like `style` and `className` to mean one specific thing.
+  Varying this API for a subset of your app makes the code less readable and less maintainable, and may cause bugs.
 
     ```jsx
     // bad

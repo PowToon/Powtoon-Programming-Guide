@@ -11,6 +11,8 @@ Other Style Guides
 
 ## Table of Contents
 
+  1. [Files](#files)
+  
   1. [Types](#types)
   1. [References](#references)
   1. [Objects](#objects)
@@ -48,6 +50,29 @@ Other Style Guides
   1. [Contributors](#contributors)
   1. [License](#license)
 
+## Files
+  - **Extensions** - We only use the `js` extension. This ensures we would not spend time
+  wondering if a file should use "old" or "new" JS. Moreovere we would not spend time on
+  bugs caused by writing in "new" JS on an "old" JS file.
+  
+  - **Filenames** - Should be the same as the default exported object:
+    - Classes and React Components should be *PascalCased*.
+    - Instances, plain objects and functions should be *camelCased*.
+  
+  ```jsx
+  // bad
+  import reservationCard from './ReservationCard' //react component
+  
+  // good
+  import ReservationCard from './ReservationCard' //react component
+  
+  // bad
+  import CommunicationService from './communicationService' //service
+  
+  // good
+  import communicationService from './communicationService' //service
+  ```
+  
 ## Types
 
   <a name="types--primitives"></a><a name="1.1"></a>
