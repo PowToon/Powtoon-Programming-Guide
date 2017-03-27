@@ -527,7 +527,8 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
   // bad
   <Foo
     ref="myRef"
-  /
+  />
+  
   // good
   fooRef = undefined
   setRef = ref => this.fooRef = ref
