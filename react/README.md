@@ -518,19 +518,24 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
 
 ## Refs
 
-  - Always use ref callbacks. eslint: [`react/no-string-refs`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-string-refs.md)
+  - Always use ref callbacks.
+  eslint: [`react/no-string-refs`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-string-refs.md)
+    
+  > Remember! If an element unmounts, ref function is called with undefined. 
 
-    ```jsx
-    // bad
-    <Foo
-      ref="myRef"
-    />
-
-    // good
-    <Foo
-      ref={(ref) => { this.myRef = ref; }}
-    />
-    ```
+  ```jsx
+  // bad
+  <Foo
+    ref="myRef"
+  /
+  // good
+  fooRef = undefined
+  setRef = ref => this.fooRef = ref
+  
+  <Foo
+    ref={this.setRef}
+  />
+  ```
 
 ## Parentheses
 
