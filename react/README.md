@@ -570,7 +570,7 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
 ## Tags
 
   - Always self-close tags that have no children.
-  eslint: [`react/self-closing-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/self-closing-comp.md)
+    eslint: [`react/self-closing-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/self-closing-comp.md)
 
     ```jsx
     // bad
@@ -581,7 +581,7 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
     ```
 
   - If your component has multi-line properties, close its tag on a new line.
-  eslint: [`react/jsx-closing-bracket-location`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-bracket-location.md)
+    eslint: [`react/jsx-closing-bracket-location`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-bracket-location.md)
 
     ```jsx
     // bad
@@ -598,59 +598,100 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
 
 ## Methods
 
-  - Use arrow functions to close over local variables.
+  - Bind event handlers for the render method using the arrow function on the class.
+    eslint: [`react/jsx-no-bind`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-bind.md)
 
-    ```jsx
-    function ItemList(props) {
-      return (
-        <ul>
-          {props.items.map((item, index) => (
-            <Item
-              key={item.key}
-              onClick={() => doSomethingWith(item.name, index)}
-            />
-          ))}
-        </ul>
-      )
-    }
-    ```
-
-  - Bind event handlers for the render method in the constructor. eslint: [`react/jsx-no-bind`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-bind.md)
-
-  > Why? A bind call in the render path creates a brand new function on every single render.
-
+    > Why? A render should be treated as a very heavy function because it is potentially called many times.
+    Creating a new function or binding a function is a heavy JS operation.
+    A bind call in the render path creates a brand new function on every single render
+    and it could cause severe performance issues.
+  
     ```jsx
     // bad
     class extends React.Component {
       onClickDiv() {
         // do stuff
       }
-
+  
       render() {
         return <div onClick={this.onClickDiv.bind(this)} />
       }
     }
-
-    // good
+    
+    // bad
     class extends React.Component {
-      constructor(props) {
-        super(props)
-
-        this.onClickDiv = this.onClickDiv.bind(this)
-      }
-
       onClickDiv() {
         // do stuff
       }
-
+    
+      render() {
+        return <div onClick={() => this.onClickDiv} />
+      }
+    }
+  
+    // good
+    class extends React.Component {
+      onClickDiv = () => {
+        // do stuff
+      }
+  
       render() {
         return <div onClick={this.onClickDiv} />
       }
     }
     ```
+    
+    - In case of iterations, a *inline component* with recompose's [withHandlers()](https://github.com/acdlite/recompose/blob/master/docs/API.md#withhandlers)
+     should be used
+    
+    ```jsx
+    import {withHandlers} from 'recompose'
+  
+    const ItemList({items, onItemClick}) => {
+      return (
+        <ul>
+          {items.map((item, index) => (
+            <Item
+              key={item.key}
+              onClick={onItemClick}
+            />
+          ))}
+        </ul>
+      )
+    }
+    
+    const enhance = withHandlers({
+      handleClick: {onClick, name} => event => onClick(name)
+    })
+    const Item = enhance(({handleClick, name}){
+      return <div onClick={handleClick}>Hey!</div>
+    })
+    
+    //OR:
+    
+    class Item extends Component {
+      static propTypes = {
+        onClick: PropTypes.func.isRequired,
+        name: PropTypes.string.isRequired
+      }
+      handleClick = e => {
+        const {onClick, name} = this.props
+        onClick(name)
+      }
+      render() {
+        return <div onClick={this.handleClick}>Hey!</div>
+      }
+    }
+  
+    ```
 
   - Do not use underscore prefix for internal methods of a React component.
-  > Why? Underscore prefixes are sometimes used as a convention in other languages to denote privacy. But, unlike those languages, there is no native support for privacy in JavaScript, everything is public. Regardless of your intentions, adding underscore prefixes to your properties does not actually make them private, and any property (underscore-prefixed or not) should be treated as being public. See issues [#1024](https://github.com/airbnb/javascript/issues/1024), and [#490](https://github.com/airbnb/javascript/issues/490) for a more in-depth discussion.
+    > Why? Underscore prefixes are sometimes used as a convention in other languages to denote privacy.
+    But, unlike those languages, there is no native support for privacy in JavaScript, everything is public.
+    Regardless of your intentions, adding underscore prefixes to your properties does not actually make them private,
+    and any property (underscore-prefixed or not) should be treated as being public.
+    See issues [#1024](https://github.com/airbnb/javascript/issues/1024),
+    and [#490](https://github.com/airbnb/javascript/issues/490) for a more in-depth discussion.
 
     ```jsx
     // bad
@@ -672,7 +713,8 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
     }
     ```
 
-  - Be sure to return a value in your `render` methods. eslint: [`react/require-render-return`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/require-render-return.md)
+  - Be sure to return a value in your `render` methods.
+  eslint: [`react/require-render-return`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/require-render-return.md)
 
     ```jsx
     // bad
