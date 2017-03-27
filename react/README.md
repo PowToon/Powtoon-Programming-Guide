@@ -190,6 +190,7 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
 ## Naming
 
   - **Reference Naming**: Use PascalCase for React components and camelCase for their instances.
+  eslint: [`react/jsx-pascal-case`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-pascal-case.md)
 
     ```jsx
     // bad
@@ -283,7 +284,9 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
 
 ## Alignment
 
-  - Follow these alignment styles for JSX syntax. eslint: [`react/jsx-closing-bracket-location`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-bracket-location.md)
+  - Follow these alignment styles for JSX syntax.
+  This should help to better keep track of a component's start, end and children.
+  eslint: [`react/jsx-closing-bracket-location`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-bracket-location.md)
 
     ```jsx
     // bad
