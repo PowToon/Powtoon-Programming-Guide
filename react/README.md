@@ -185,7 +185,7 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
 
 * A Regular React Component. It is the most flexible one.
 
-//TODO: More guidelines will follow. For now, choose the component type you need based on the explanations above.
+>//TODO: More guidelines will follow. For now, choose the component type you need based on the explanations above.
 
 ## Naming
 
@@ -285,8 +285,9 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
 ## Alignment
 
   - Follow these alignment styles for JSX syntax.
-  This should help to better keep track of a component's start, end and children.
   eslint: [`react/jsx-closing-bracket-location`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-bracket-location.md)
+
+  > Why? This should help to better keep track of a component's start, end and children.
 
     ```jsx
     // bad
@@ -313,7 +314,8 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
 
 ## Quotes
 
-  - Always use double quotes (`"`) for JSX attributes, but single quotes (`'`) for all other JS. eslint: [`jsx-quotes`](http://eslint.org/docs/rules/jsx-quotes)
+  - Always use double quotes (`"`) for JSX attributes, but single quotes (`'`) for all other JS.
+  eslint: [`jsx-quotes`](http://eslint.org/docs/rules/jsx-quotes)
 
   > Why? Regular HTML attributes also typically use double quotes instead of single, so JSX attributes mirror this convention.
 
