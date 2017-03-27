@@ -194,16 +194,16 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
 
     ```jsx
     // bad
-    import reservationCard from './ReservationCard';
+    import reservationCard from './ReservationCard'
 
     // good
-    import ReservationCard from './ReservationCard';
+    import ReservationCard from './ReservationCard'
 
     // bad
-    const ReservationItem = <ReservationCard />;
+    const ReservationItem = <ReservationCard />
 
     // good
-    const reservationItem = <ReservationCard />;
+    const reservationItem = <ReservationCard />
     ```
 
   - **Component Naming**: Use the filename as the component name. For example,
@@ -213,13 +213,13 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
 
     ```jsx
     // bad
-    import Footer from './Footer/Footer';
+    import Footer from './Footer/Footer'
 
     // bad
-    import Footer from './Footer/index';
+    import Footer from './Footer/index'
 
     // good
-    import Footer from './Footer';
+    import Footer from './Footer'
     ```
     
   - **Higher-order Component Naming**: Use a composite of the higher-order component's
@@ -234,22 +234,22 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
     // bad
     export default function withFoo(WrappedComponent) {
       return function WithFoo(props) {
-        return <WrappedComponent {...props} foo />;
+        return <WrappedComponent {...props} foo />
       }
     }
 
     // good
     export default function withFoo(WrappedComponent) {
       function WithFoo(props) {
-        return <WrappedComponent {...props} foo />;
+        return <WrappedComponent {...props} foo />
       }
 
       const wrappedComponentName = WrappedComponent.displayName
         || WrappedComponent.name
-        || 'Component';
+        || 'Component'
 
-      WithFoo.displayName = `withFoo(${wrappedComponentName})`;
-      return WithFoo;
+      WithFoo.displayName = `withFoo(${wrappedComponentName})`
+      return WithFoo
     }
     ```
 
@@ -275,7 +275,7 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
     export default React.createClass({
       displayName: 'ReservationCard',
       // stuff goes here
-    });
+    })
 
     // good
     export default class ReservationCard extends React.Component {
@@ -493,27 +493,27 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
   ```jsx
   // bad
   function SFC({ foo, bar, children }) {
-    return <div>{foo}{bar}{children}</div>;
+    return <div>{foo}{bar}{children}</div>
   }
   SFC.propTypes = {
     foo: PropTypes.number.isRequired,
     bar: PropTypes.string,
     children: PropTypes.node,
-  };
+  }
 
   // good
   function SFC({ foo, bar }) {
-    return <div>{foo}{bar}</div>;
+    return <div>{foo}{bar}</div>
   }
   SFC.propTypes = {
     foo: PropTypes.number.isRequired,
     bar: PropTypes.string,
     children: PropTypes.node,
-  };
+  }
   SFC.defaultProps = {
     bar: '',
     children: null,
-  };
+  }
   ```
 
 ## Refs
@@ -540,14 +540,15 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
 
 ## Parentheses
 
-  - Wrap JSX tags in parentheses when they span more than one line. eslint: [`react/wrap-multilines`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/wrap-multilines.md)
+  - Wrap JSX tags in parentheses when they span more than one line.
+  eslint: [`react/wrap-multilines`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/wrap-multilines.md)
 
     ```jsx
     // bad
     render() {
       return <MyComponent className="long body" foo="bar">
                <MyChild />
-             </MyComponent>;
+             </MyComponent>
     }
 
     // good
@@ -556,13 +557,13 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
         <MyComponent className="long body" foo="bar">
           <MyChild />
         </MyComponent>
-      );
+      )
     }
 
     // good, when single line
     render() {
-      const body = <div>hello</div>;
-      return <MyComponent>{body}</MyComponent>;
+      const body = <div>hello</div>
+      return <MyComponent>{body}</MyComponent>
     }
     ```
 
@@ -608,7 +609,7 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
             />
           ))}
         </ul>
-      );
+      )
     }
     ```
 
@@ -631,9 +632,9 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
     // good
     class extends React.Component {
       constructor(props) {
-        super(props);
+        super(props)
 
-        this.onClickDiv = this.onClickDiv.bind(this);
+        this.onClickDiv = this.onClickDiv.bind(this)
       }
 
       onClickDiv() {
@@ -657,7 +658,7 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
       },
 
       // other stuff
-    });
+    })
 
     // good
     class extends React.Component {
@@ -674,12 +675,12 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
     ```jsx
     // bad
     render() {
-      (<div />);
+      (<div />)
     }
 
     // good
     render() {
-      return (<div />);
+      return (<div />)
     }
     ```
 
@@ -705,21 +706,21 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
   - How to define `propTypes`, `defaultProps`, `contextTypes`, etc...
 
     ```jsx
-    import React, { PropTypes } from 'react';
+    import React, { PropTypes } from 'react'
 
     const propTypes = {
       id: PropTypes.number.isRequired,
       url: PropTypes.string.isRequired,
       text: PropTypes.string,
-    };
+    }
 
     const defaultProps = {
       text: 'Hello World',
-    };
+    }
 
     class Link extends React.Component {
       static methodsAreOk() {
-        return true;
+        return true
       }
 
       render() {
@@ -727,10 +728,10 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
       }
     }
 
-    Link.propTypes = propTypes;
-    Link.defaultProps = defaultProps;
+    Link.propTypes = propTypes
+    Link.defaultProps = defaultProps
 
-    export default Link;
+    export default Link
     ```
 
   - Ordering for `React.createClass`: eslint: [`react/sort-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/sort-comp.md)
