@@ -383,7 +383,8 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
     />
     ```
 
-  - Omit the value of the prop when it is explicitly `true`. eslint: [`react/jsx-boolean-value`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-boolean-value.md)
+  - Omit the value of the prop when it is explicitly `true`.
+  eslint: [`react/jsx-boolean-value`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-boolean-value.md)
 
     ```jsx
     // bad
@@ -397,25 +398,32 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
     />
     ```
 
-  - Always include an `alt` prop on `<img>` tags. If the image is presentational, `alt` can be an empty string or the `<img>` must have `role="presentation"`. eslint: [`jsx-a11y/img-has-alt`](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/img-has-alt.md)
+  - Always include an `alt` prop on `<img>` tags. If the image is presentational,
+  `alt` can be an empty string or the `<img>` must have `role="presentation"`.
+  eslint: [`jsx-a11y/img-has-alt`](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/img-has-alt.md)
 
+    > //TODO: is this really necessary?
+  
     ```jsx
     // bad
     <img src="hello.jpg" />
-
+    
     // good
     <img src="hello.jpg" alt="Me waving hello" />
-
+    
     // good
     <img src="hello.jpg" alt="" />
-
+    
     // good
     <img src="hello.jpg" role="presentation" />
     ```
 
-  - Do not use words like "image", "photo", or "picture" in `<img>` `alt` props. eslint: [`jsx-a11y/img-redundant-alt`](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/img-redundant-alt.md)
+  - Do not use words like "image", "photo", or "picture" in `<img>` `alt` props.
+  eslint: [`jsx-a11y/img-redundant-alt`](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/img-redundant-alt.md)
 
-  > Why? Screenreaders already announce `img` elements as images, so there is no need to include this information in the alt text.
+    > //TODO: is this really necessary?
+    
+    > Why? Screenreaders already announce `img` elements as images, so there is no need to include this information in the alt text.
 
     ```jsx
     // bad
@@ -438,7 +446,8 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
     <div role="button" />
     ```
 
-  - Do not use `accessKey` on elements. eslint: [`jsx-a11y/no-access-key`](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-access-key.md)
+  - Do not use `accessKey` on elements.
+  eslint: [`jsx-a11y/no-access-key`](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-access-key.md)
 
   > Why? Inconsistencies between keyboard shortcuts and keyboard commands used by people using screenreaders and keyboards complicate accessibility.
 
@@ -450,7 +459,13 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
   <div />
   ```
 
-  - Avoid using an array index as `key` prop, prefer a unique ID. ([why?](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318))
+  - Avoid using an array index as `key` prop, prefer a unique ID.
+  
+  > Why? In short, a key is the only thing React uses to identify DOM elements.
+  What happens if you push an item to the list or remove something in the middle?
+  If the key is same as before React assumes that the DOM element represents the same component as before.
+  But that is no longer true. more info can be found in [this blog post](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318).
+  Please understand how it works. 
 
   ```jsx
   // bad
@@ -472,7 +487,8 @@ It is the fastest of the three. Yes- [it is faster then stateless components](ht
 
   - Always define explicit defaultProps for all non-required props.
 
-  > Why? propTypes are a form of documentation, and providing defaultProps means the reader of your code doesn’t have to assume as much. In addition, it can mean that your code can omit certain type checks.
+  > Why? propTypes are a form of documentation, and providing defaultProps means the reader of your code doesn’t
+  have to assume as much. In addition, it can mean that your code can omit certain type checks.
 
   ```jsx
   // bad
