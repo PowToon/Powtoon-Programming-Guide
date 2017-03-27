@@ -3,7 +3,7 @@
 This programming guide was forged from a several highly trending
 guides that with a personal touch.
 
-The main goal of the guide is
+The primary goal of the guide is
 to ensure that modern best practices that are widely agreed upon
 in the huge JavaScript, React, and Functional Programming communities
 are held throughout our whole project.
@@ -11,14 +11,15 @@ are held throughout our whole project.
 The secondary goal, that is very important as well, is to make sure
 everybody style their code the same. This can partly be achieved with
 linting but some rules are not and those who are still better be
-documented, discussed, explained, exampled and understood.
+documented, discussed, explained, exemplified and understood.
 
 It is important to notice that some parts are highly debated in the
 community and will be surely debated between us as well (even on a
 biblical scale :P) but nevertheless we should all stick to the
-guide. Changing the guide should be relatively easy and everybody
-are **highly encouraged to influence it** to make changes in the guide
-and make everybody align to their opinion.
+guide.
+
+Changing the guide should be relatively easy and the whole company
+should be **highly encouraged to influence it**.
 
 The guide consists of several parts:
 
